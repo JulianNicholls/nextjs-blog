@@ -1,21 +1,43 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-export default function Home() {
+import Layout, { siteTitle } from '../components/layout';
+import utilStyles from '../styles/utils.module.css';
+import { getSortedPosts } from '../lib/posts';
+
+export default function Home({ allPostsData }) {
   return (
-    <div className="container">
+    <Layout home>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{siteTitle}</title>
       </Head>
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
+      <section className={utilStyles.headingMd}>
+        <p>
+          A software engineer for over 30 years, I have worked on many different
+          things, including defence, mobile telephones, and internet advertising.
         </p>
+        <p>
+          (This is a sample website - you'll be building websites like this in no
+          time on <a href="https://nextjs.org/learn">our next.js tutorial</a>).
+        </p>
+      </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </Layout>
+  );
+}
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
