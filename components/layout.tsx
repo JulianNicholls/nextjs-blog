@@ -5,9 +5,14 @@ import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 
 const name = 'Julian Nicholls';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'Next Blog Sample';
 
-export default function Layout({ children, home }) {
+interface LayoutProps {
+  children: React.ReactNode;
+  home?: Boolean;
+}
+
+export default function Layout({ children, home }: LayoutProps) {
   return (
     <div className={styles.container}>
       <Head>

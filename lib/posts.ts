@@ -2,9 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import remark from 'remark';
-import html from 'remark-html';
+import remarkHtml from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
+
+type MetaData = {
+  title: string;
+  date: string;
+};
 
 export function getSortedPosts() {
   // Get markdown files from posts directory
@@ -22,7 +27,7 @@ export function getSortedPosts() {
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as MetaData),
     };
   });
 
@@ -40,6 +45,7 @@ export function getAllPostIds() {
   // [
   //   { params: { id: 'ssg-ssr' }},
   //   { params: { id: 'pre-rendering' }},
+  //   ...
   // }
 
   return filenames.map((filename) => {
@@ -49,7 +55,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -57,14 +63,15 @@ export async function getPostData(id) {
   const matterResult = matter(fileContents);
 
   // Use remark to convert markdown to HTML
-
-  const processedContent = await remark().use(html).process(matterResult.content);
+  const processedContent = await remark()
+    .use(remarkHtml)
+    .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
   // Return the ID and content
   return {
     id,
     contentHtml,
-    ...matterResult.data,
+    ...(matterResult.data as MetaData),
   };
 }
