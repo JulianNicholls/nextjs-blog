@@ -1,24 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Octokit } from '@octokit/rest';
-
-const auth = process.env.GITHUB_REPO_TOKEN;
-
-const octokit = new Octokit({ auth });
-
-const getFileData = (
-  path: string,
-  owner = 'JulianNicholls',
-  repo = 'nextjs-blog'
-) => {
-  return octokit.repos.getContent({
-    owner,
-    repo,
-    path,
-  });
-};
+import { getFileData } from '../../lib/octokit-utils';
+import { Base64 } from 'js-base64';
 
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   const result = await getFileData('/styles/utils.module.css');
+  const { path, sha, size, encoding } = result.data;
+  let { content } = result.data;
 
-  res.status(result.status).json({ data: result.data });
+  if (encoding === 'base64') content = Base64.decode(content);
+
+  res.status(result.status).json({ file: { path, sha, size, encoding, content } });
 };
