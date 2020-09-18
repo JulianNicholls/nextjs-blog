@@ -4,10 +4,14 @@ import { GetStaticProps } from 'next';
 
 import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
-import { getSortedPosts } from '../lib/posts';
+import { getSortedPosts, PostMetaData } from '../lib/posts';
 import Date from '../components/date';
 
-export default function Home({ allPostsData }) {
+interface HomeProps {
+  allPostsData: PostMetaData[];
+}
+
+export default function Home({ allPostsData }: HomeProps) {
   return (
     <Layout home>
       <Head>

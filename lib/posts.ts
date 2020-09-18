@@ -11,7 +11,15 @@ type MetaData = {
   date: string;
 };
 
-export function getSortedPosts() {
+export type PostMetaData = MetaData & {
+  id: string;
+};
+
+export type PostData = PostMetaData & {
+  contentHtml: string;
+};
+
+export function getSortedPosts(): PostMetaData[] {
   // Get markdown files from posts directory
   const filenames = fs.readdirSync(postsDirectory);
   const allPostsData = filenames.map((filename) => {
