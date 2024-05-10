@@ -17,10 +17,7 @@ export default function Layout({ children, home }: LayoutProps) {
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="learn how to build a personal website using Next.js"
-        />
+        <meta name="description" content="learn how to build a personal website using Next.js" />
 
         <meta
           property="og:image"
@@ -45,17 +42,15 @@ export default function Layout({ children, home }: LayoutProps) {
         ) : (
           <>
             <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
-              </a>
+              <img
+                src="/images/profile.jpg"
+                className={`${styles.headerImage} ${utilStyles.borderCircle}`}
+                alt={name}
+              />
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+              <Link href="/" className={utilStyles.colorInherit}>
+                {name}
               </Link>
             </h2>
           </>
@@ -65,9 +60,7 @@ export default function Layout({ children, home }: LayoutProps) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href="/">
-            <a>Back Home</a>
-          </Link>
+          <Link href="/">Back Home</Link>
         </div>
       )}
     </div>

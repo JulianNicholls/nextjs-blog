@@ -20,12 +20,12 @@ export default function Home({ allPostsData }: HomeProps) {
 
       <section className={utilStyles.headingMd}>
         <p>
-          A software engineer for over 30 years, I have worked on many different
-          things, including defence, mobile telephones, and internet advertising.
+          A software engineer for over 30 years, I have worked on many different things, including
+          defence, mobile telephones, and internet advertising.
         </p>
         <p>
-          (This is a sample website - you'll be building websites like this in no
-          time on <a href="https://nextjs.org/learn">our next.js tutorial</a>).
+          (This is a sample website - you'll be building websites like this in no time on{' '}
+          <a href="https://nextjs.org/learn">our next.js tutorial</a>).
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -34,7 +34,7 @@ export default function Home({ allPostsData }: HomeProps) {
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href="/posts/[id]" as={`/posts/${id}`}>
-                <a>{title}</a>
+                {title}
               </Link>
               <br />
               <small className={utilStyles.lightText}>
