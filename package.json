@@ -10,13 +10,21 @@
   "dependencies": {
     "@octokit/rest": "^18.0.6",
     "date-fns": "^2.16.1",
+<<<<<<< HEAD
     "gray-matter": "^4.0.3",
     "js-base64": "^3.7.7",
     "next": "^14.2.3",
     "react": "18",
     "react-dom": "18",
+=======
+    "gray-matter": "^4.0.2",
+    "js-base64": "^3.5.2",
+    "next": "14.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+>>>>>>> d24f62fe5f7559a30cb02352ad57828ca1f7215f
     "remark": "^12.0.1",
-    "remark-html": "^12.0.0"
+    "remark-html": "^13.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
